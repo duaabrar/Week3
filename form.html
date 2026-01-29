@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+    }
+
+    .container {
+      width: 350px;
+      background: white;
+      margin: 80px auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+      height: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Registration Form</h2>
+
+    <form id="myForm">
+
+      <label>Name</label>
+      <input type="text" id="name">
+      <div id="nameError" class="error"></div>
+
+      <label>Email</label>
+      <input type="text" id="email">
+      <div id="emailError" class="error"></div>
+
+      <label>Password</label>
+      <input type="password" id="password">
+      <div id="passwordError" class="error"></div>
+
+      <button type="submit">Submit</button>
+
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

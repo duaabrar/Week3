@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Registration Form</title>
+
+  <style>
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+    .success {
+      color: green;
+      font-size: 16px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body bgcolor="MistyRose">
+<!-- Navigation Bar -->
+<table width="100%" cellpadding="10" style="background-color: LightCoral;">
+  <tr>
+    <td align="center">
+      <b>
+        <a href="#" style="color:white; text-decoration:none;">Home</a> |
+        <a href="#" style="color:white; text-decoration:none;">Register</a> |
+        <a href="#" style="color:white; text-decoration:none;">About</a> |
+        <a href="#" style="color:white; text-decoration:none;">Contact</a>
+      </b>
+    </td>
+  </tr>
+</table>
+
+<form id="studentForm">
+<table align="center" width="700" cellpadding="10">
+
+<tr>
+  <td colspan="2" align="center">
+    <h1>Student Registration Form</h1>
+  </td>
+</tr>
+
+<tr>
+  <td>Student Name :</td>
+  <td>
+    <input type="text" id="name" size="50">
+    <div class="error" id="nameError"></div>
+  </td>
+</tr>
+
+<tr>
+  <td>Email :</td>
+  <td>
+    <input type="text" id="email" size="50">
+    <div class="error" id="emailError"></div>
+  </td>
+</tr>
+
+<tr>
+  <td>Password :</td>
+  <td>
+    <input type="password" id="password" size="50">
+    <div class="error" id="passwordError"></div>
+  </td>
+</tr>
+
+<tr>
+  <td>Subject :</td>
+  <td>
+    <input type="radio" name="subject" value="HTML"> HTML
+    <input type="radio" name="subject" value="CSS"> CSS
+    <input type="radio" name="subject" value="JavaScript"> JavaScript
+    <div class="error" id="subjectError"></div>
+  </td>
+</tr>
+<tr>
+    <td>
+          Age:  <input type="number" id="age" name="age" min="1" max="120" >
+    </td>
+</tr>
+<tr>
+  <td>
+    <input type="checkbox" id="terms">
+    Accept Terms & Conditions
+  </td>
+  <td>
+    <div class="error" id="termsError"></div>
+  </td>
+</tr>
+
+<tr>
+  <td colspan="2" align="center">
+    <input type="submit" value="Register">
+  </td>
+</tr>
+
+<tr>
+  <td colspan="2">
+    <div class="success" id="successMsg"></div>
+  </td>
+</tr>
+
+</table>
+</form>
+
+<script>
+document.getElementById("studentForm").addEventListener("submit", function(e) {
+  e.preventDefault();   // preventDefault()
+
+  // Accessing input values
+  let name = document.getElementById("name").value.trim();
+  let email = document.getElementById("email").value.trim();
+  let password = document.getElementById("password").value;
+  let terms = document.getElementById("terms").checked;
+  let subject = document.querySelector('input[name="subject"]:checked');
+
+  // Clear messages
+  document.querySelectorAll(".error").forEach(el => el.innerHTML = "");
+  document.getElementById("successMsg").innerHTML = "";
+
+  let valid = true;
+
+  // Name validation (no numbers)
+  let nameRegex = /^[A-Za-z ]+$/;
+  if (name === "") {
+    document.getElementById("nameError").innerHTML = "Name is required";
+    valid = false;
+  } else if (!nameRegex.test(name)) {
+    document.getElementById("nameError").innerHTML = "Numbers are not allowed";
+    valid = false;
+  }
+
+  // Email validation (regex)
+  let emailRegex = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+  if (!emailRegex.test(email)) {
+    document.getElementById("emailError").innerHTML = "Invalid email format";
+    valid = false;
+  }
+
+  // Password validation
+  if (password.length < 6) {
+    document.getElementById("passwordError").innerHTML =
+      "Password must be at least 6 characters";
+    valid = false;
+  }
+
+  // Subject validation (radio)
+  if (!subject) {
+    document.getElementById("subjectError").innerHTML =
+      "Please select a subject";
+    valid = false;
+  }
+
+  // Checkbox validation
+  if (!terms) {
+    document.getElementById("termsError").innerHTML =
+      "You must accept terms & conditions";
+    valid = false;
+  }
+
+  // Success
+  if (valid) {
+    // localStorage.setItem()
+    localStorage.setItem("studentName", name);
+    localStorage.setItem("studentEmail", email);
+    localStorage.setItem("studentSubject", subject.value);
+
+    // localStorage.getItem()
+    let storedName = localStorage.getItem("studentName");
+
+    document.getElementById("successMsg").innerHTML =
+      "Form submitted successfully! Welcome " + storedName;
+
+    // Reset form
+    document.getElementById("studentForm").reset();
+  }
+});
+</script>
+
+<!-- Footer -->
+<table width="100%" cellpadding="10" style="background-color: #333; margin-top: 20px;">
+  <tr>
+    <td align="center" style="color: white;">
+      © 2026 Student Registration System |
+      <a href="#" style="color: lightgray; text-decoration: none;">Privacy Policy</a> |
+      <a href="#" style="color: lightgray; text-decoration: none;">Help</a>
+    </td>
+  </tr>
+</table>
+
+
+</body>
+</html>

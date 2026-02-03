@@ -18,7 +18,7 @@
 </head>
 
 <body bgcolor="MistyRose">
-<!-- Navigation Bar -->
+
 <table width="100%" cellpadding="10" style="background-color: LightCoral;">
   <tr>
     <td align="center">
@@ -108,20 +108,20 @@
 document.getElementById("studentForm").addEventListener("submit", function(e) {
   e.preventDefault();   // preventDefault()
 
-  // Accessing input values
+  
   let name = document.getElementById("name").value.trim();
   let email = document.getElementById("email").value.trim();
   let password = document.getElementById("password").value;
   let terms = document.getElementById("terms").checked;
   let subject = document.querySelector('input[name="subject"]:checked');
 
-  // Clear messages
+  
   document.querySelectorAll(".error").forEach(el => el.innerHTML = "");
   document.getElementById("successMsg").innerHTML = "";
 
   let valid = true;
 
-  // Name validation (no numbers)
+  
   let nameRegex = /^[A-Za-z ]+$/;
   if (name === "") {
     document.getElementById("nameError").innerHTML = "Name is required";
@@ -131,54 +131,53 @@ document.getElementById("studentForm").addEventListener("submit", function(e) {
     valid = false;
   }
 
-  // Email validation (regex)
   let emailRegex = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
   if (!emailRegex.test(email)) {
     document.getElementById("emailError").innerHTML = "Invalid email format";
     valid = false;
   }
 
-  // Password validation
+  
   if (password.length < 6) {
     document.getElementById("passwordError").innerHTML =
       "Password must be at least 6 characters";
     valid = false;
   }
 
-  // Subject validation (radio)
+  
   if (!subject) {
     document.getElementById("subjectError").innerHTML =
       "Please select a subject";
     valid = false;
   }
 
-  // Checkbox validation
+  
   if (!terms) {
     document.getElementById("termsError").innerHTML =
       "You must accept terms & conditions";
     valid = false;
   }
 
-  // Success
+  
   if (valid) {
-    // localStorage.setItem()
+    
     localStorage.setItem("studentName", name);
     localStorage.setItem("studentEmail", email);
     localStorage.setItem("studentSubject", subject.value);
 
-    // localStorage.getItem()
+    
     let storedName = localStorage.getItem("studentName");
 
     document.getElementById("successMsg").innerHTML =
       "Form submitted successfully! Welcome " + storedName;
 
-    // Reset form
+    
     document.getElementById("studentForm").reset();
   }
 });
 </script>
 
-<!-- Footer -->
+
 <table width="100%" cellpadding="10" style="background-color: #333; margin-top: 20px;">
   <tr>
     <td align="center" style="color: white;">
